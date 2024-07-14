@@ -1,11 +1,12 @@
 import {View, Text} from "react-native";
-import {useLocalSearchParams} from "expo-router";
+import {Stack, useLocalSearchParams} from "expo-router";
 
 const ProductDetailsScreen = () => {
     const { id   } = useLocalSearchParams();
 
     return (
         <View>
+            <Stack.Screen options={{title: `Product Details ${id}` }}/>
             <Text>Product Details Screen : {id}</Text>
         </View>
     );
