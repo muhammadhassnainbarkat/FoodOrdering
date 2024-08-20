@@ -11,12 +11,16 @@ const ProductDetailsScreen = () => {
     const { id   } = useLocalSearchParams();
     const product = products.find((product) => product.id.toString() === id);
 
-    const [selectedSize, setSelectedSize] = useState('M')
+    const [selectedSize, setSelectedSize] = useState('M');
+
+    const addToCard = () => {
+        console.warn("Add to cart, size: " + selectedSize);
+    }
 
     if(!product) return <Text>Product Not Found</Text>;
 
     return (
-        <View>
+        <View style={styles.container}>
             <Stack.Screen options={{title: product.name }}/>
 
             <Image
@@ -40,7 +44,7 @@ const ProductDetailsScreen = () => {
                 ))}
             </View>
             <Text style={styles.price}>${product.price}</Text>
-            <Button title={"hassnain"} />
+            <Button style={styles.button} text={"Add to Cart"} onPress={addToCard} />
         </View>
     );
 };
@@ -48,12 +52,14 @@ const ProductDetailsScreen = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
+        paddingHorizontal: 15,
         flex: 1
     },
     price: {
         fontSize: 15,
         fontWeight: 'bold',
         color: Colors.light.tint,
+        marginTop:"auto"
     },
     image: {
         width: '100%',
@@ -75,7 +81,10 @@ const styles = StyleSheet.create({
     },
     sizeText: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    button: {
+        marginTop: 20
     }
 })
 

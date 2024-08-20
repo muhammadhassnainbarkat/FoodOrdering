@@ -1,30 +1,34 @@
-import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Colors from '../constants/Colors';
+import React, { forwardRef } from 'react';
 
-export default function Button(props) {
-    const { onPress, title = 'Save' } = props;
-    return (
-        <Pressable style={styles.button} onPress={onPress}>
-            <Text style={styles.text}>{title}</Text>
-        </Pressable>
-    );
-}
+type ButtonProps = {
+    text: string;
+} & React.ComponentPropsWithoutRef<typeof Pressable>;
+
+const Button = forwardRef<View | null, ButtonProps>(
+    ({ text, ...pressableProps }, ref) => {
+        return (
+            <Pressable ref={ref} {...pressableProps} style={styles.container}>
+                <Text style={styles.text}>{text}</Text>
+            </Pressable>
+        );
+    }
+);
 
 const styles = StyleSheet.create({
-    button: {
+    container: {
+        backgroundColor: Colors.light.tint,
+        padding: 15,
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'black',
+        borderRadius: 100,
+        marginVertical: 10,
     },
     text: {
         fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
+        fontWeight: '600',
         color: 'white',
     },
 });
+
+export default Button;
