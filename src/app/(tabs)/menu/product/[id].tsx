@@ -4,17 +4,20 @@ import products from "@/assets/data/products";
 import Colors from "@/constants/Colors";
 import {useState} from "react";
 import Button from "@/components/Button";
+import {useCart} from "@/src/provider/CartProvider";
+import {PizzaSize} from "@/src/types";
 
-const sizes = ['S', 'M', 'L', 'XL'];
+const sizes : PizzaSize[] = ['S', 'M', 'L', 'XL'];
 
 const ProductDetailsScreen = () => {
     const { id   } = useLocalSearchParams();
     const product = products.find((product) => product.id.toString() === id);
 
-    const [selectedSize, setSelectedSize] = useState('M');
+    const [selectedSize, setSelectedSize] = useState<PizzaSize>('M');
 
-    const addToCard = () => {
-        console.warn("Add to cart, size: " + selectedSize);
+    const { addItem } = useCart();
+    const addToCart = () => {
+        addItem(product, selectedSize)
     }
 
     if(!product) return <Text>Product Not Found</Text>;
@@ -44,7 +47,7 @@ const ProductDetailsScreen = () => {
                 ))}
             </View>
             <Text style={styles.price}>${product.price}</Text>
-            <Button style={styles.button} text={"Add to Cart"} onPress={addToCard} />
+            <Button style={styles.button} text={"Add to Cart"} onPress={addToCart} />
         </View>
     );
 };
