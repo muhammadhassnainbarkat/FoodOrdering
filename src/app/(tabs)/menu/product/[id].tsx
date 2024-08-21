@@ -1,9 +1,9 @@
-import {View, Text, StyleSheet, Image, Pressable} from "react-native";
+import {Image, Pressable, StyleSheet, Text, View} from "react-native";
 import {Stack, useLocalSearchParams} from "expo-router";
 import products from "@/assets/data/products";
-import Colors from "@/constants/Colors";
+import Colors from "@/src/constants/Colors";
 import {useState} from "react";
-import Button from "@/components/Button";
+import Button from "@/src/components/Button";
 import {useCart} from "@/src/provider/CartProvider";
 import {PizzaSize} from "@/src/types";
 

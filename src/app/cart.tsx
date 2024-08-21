@@ -1,8 +1,8 @@
-import {View,Text, Platform, FlatList} from "react-native";
+import {FlatList, Platform, Text, View} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import {useCart} from "@/src/provider/CartProvider";
-import CartListItem from "@/components/CartListItem";
-import Button from "@/components/Button";
+import CartListItem from "@/src/components/CartListItem";
+import Button from "@/src/components/Button";
 
 const CartScreen = () => {
     const { items, total } = useCart();
